@@ -34,6 +34,31 @@ class VCalendar {
     return { start, end };
   }
 
+  static format(data: Schedule.RaspList) {
+    let title = data.name.trim();
+    if (data.info.type) title = data.info.type + " | " + title;
+
+    let description = "";
+    if (data.info.moduleName) description += data.info.moduleName + "\n";
+    if (data.info.theme) description += data.info.theme + "\n";
+    if (data.info.groupName) description += data.info.groupName + "\n";
+    if (data.info.teachersNames) description += "\n" + data.info.teachersNames;
+    description = description.trim();
+
+    return {
+      start: new Date(data.start),
+      end: new Date(data.end),
+
+      title,
+      location: data.info.link
+        ? data.info.link
+        : data.info.aud
+        ? data.info.aud
+        : "",
+      description,
+    };
+  }
+
   static getHash(data: Omit<EventData, "id" | "hash">) {
     const { start, end, title, location, description } = data;
     const id = hash([start.toJSON(), end.toJSON()].join("-&-"));

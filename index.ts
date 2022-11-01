@@ -53,14 +53,7 @@ function parseSchedule() {
       ({ start }) =>
         new Date(start).getTime() >= VCalendar.range().start.getTime()
     )
-    .map((data) => ({
-      start: new Date(data.start),
-      end: new Date(data.end),
-
-      title: data.name,
-      location: data.info.link ? data.info.link : data.info.aud,
-      description: `${data.info.moduleName}\n${data.info.theme}\n${data.info.groupName}\n\n${data.info.teachersNames}`,
-    }));
+    .map(VCalendar.format);
 
   const allEvents = calendar.all();
   const allIds = schedule.map((data) => VCalendar.getHash(data).id.toString());
