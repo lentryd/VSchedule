@@ -12,8 +12,12 @@ function init(login: string, password: string) {
   );
   if (trigger) ScriptApp.deleteTrigger(trigger);
 
-  properties.setProperty("USERNAME", login);
-  properties.setProperty("PASSWORD", password);
+  if (login && password) {
+    properties.setProperty("USERNAME", login);
+    properties.setProperty("PASSWORD", password);
+  } else if (!properties.getProperty("AUTH_TOKEN")) {
+    throw new Error("Не указаны логин и пароль");
+  }
 
   const edu = new Wrapper();
   if (!edu.logIn()) return;
