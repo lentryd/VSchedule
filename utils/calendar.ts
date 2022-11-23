@@ -4,6 +4,7 @@ type EventData = {
 
   id: number;
   hash: number;
+  color: string;
 
   title: string;
   location: string;
@@ -50,6 +51,7 @@ class VCalendar {
       end: new Date(data.end),
 
       title,
+      color: data.color,
       location: data.info.link
         ? data.info.link
         : data.info.aud
@@ -60,9 +62,9 @@ class VCalendar {
   }
 
   static getHash(data: Omit<EventData, "id" | "hash">) {
-    const { start, end, title, location, description } = data;
+    const { start, end, color, title, location, description } = data;
     const id = hash([start.toJSON(), end.toJSON()].join("-&-"));
-    const contentHash = hash([title, location, description].join("-&-"));
+    const contentHash = hash([title, color, location, description].join("-&-"));
 
     return { id, contentHash };
   }
@@ -115,6 +117,7 @@ class VCalendar {
     if (item) {
       item.event
         .setTitle(data.title)
+        .setColor(nearestColor(data.color))
         .setLocation(data.location)
         .setDescription(data.description)
         .setTag("EVENT_HASH", contentHash.toString());
@@ -125,7 +128,8 @@ class VCalendar {
           description: data.description,
         })
         .setTag("EVENT_ID", id.toString())
-        .setTag("EVENT_HASH", contentHash.toString());
+        .setTag("EVENT_HASH", contentHash.toString())
+        .setColor(nearestColor(data.color));
       item = { id: id.toString(), hash: contentHash.toString(), event };
     }
 
