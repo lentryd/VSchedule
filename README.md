@@ -17,7 +17,7 @@
 
 > Все введенные вами данные хранятся на серверах Google, и только у вас есть к ним доступ.
 
-1. Перейдите на [страницу скрипта](https://script.google.com/macros/s/AKfycbzDXZyvhyk5f7FXXVJB7UcI1CgXEmPX888b8xYlUQx8QfuGYfPO1UEM-a9Tfnum5yM/exec)
+1. Перейдите на [страницу скрипта](https://script.google.com/macros/s/AKfycbzCke0GRFzcL_M4VsADihWPP2I2WwgjZEfjvHNcDPsdzIWiUNcvVE2_VYANAcuWaTw/exec)
 2. Предоставьте доступ к своему аккаунту Google
    > На данный момент скрипт не проверен Google и поэтому отображается такое окно. Нажмите "Посмотреть дополнительную информацию" -> "Перейти на страницу...".
    > ![Картинка](./docs/image.png)
