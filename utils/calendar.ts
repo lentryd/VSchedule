@@ -64,7 +64,9 @@ class VCalendar {
   static getHash(data: Omit<EventData, "id" | "hash">) {
     const { start, end, color, title, location, description } = data;
     const id = hash([start.toJSON(), end.toJSON()].join("-&-"));
-    const contentHash = hash([title, color, location, description].join("-&-"));
+    const contentHash = hash(
+      [title, location, description, nearestColor(color)].join("-&-")
+    );
 
     return { id, contentHash };
   }

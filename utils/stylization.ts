@@ -16,11 +16,11 @@ const COLORS = [
     value: CalendarApp.EventColor.PALE_RED,
   },
   {
-    hex: "#AB8B00",
+    hex: "#fbd75b",
     value: CalendarApp.EventColor.YELLOW,
   },
   {
-    hex: "#BE6D00",
+    hex: "#ffb878",
     value: CalendarApp.EventColor.ORANGE,
   },
   {
@@ -28,19 +28,19 @@ const COLORS = [
     value: CalendarApp.EventColor.CYAN,
   },
   {
-    hex: "#5a6986",
+    hex: "#e1e1e1",
     value: CalendarApp.EventColor.GRAY,
   },
   {
-    hex: "#2952a3",
+    hex: "#5484ed",
     value: CalendarApp.EventColor.BLUE,
   },
   {
-    hex: "#0d7813",
+    hex: "#51b749",
     value: CalendarApp.EventColor.GREEN,
   },
   {
-    hex: "#a32929",
+    hex: "#dc2127",
     value: CalendarApp.EventColor.RED,
   },
 ] as {
