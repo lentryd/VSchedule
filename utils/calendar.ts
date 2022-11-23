@@ -1,3 +1,6 @@
+const REGEX_URL =
+  /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+
 type EventData = {
   start: Date;
   end: Date;
@@ -52,7 +55,7 @@ class VCalendar {
 
       title,
       color: data.color,
-      location: data.info.link
+      location: REGEX_URL.test(data.info.link)
         ? data.info.link
         : data.info.aud
         ? data.info.aud
