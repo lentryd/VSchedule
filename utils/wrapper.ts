@@ -141,6 +141,8 @@ declare module Schedule {
 class Wrapper {
   private userName: string;
   private password: string;
+  private educationSpace: number;
+
   private _properties: GoogleAppsScript.Properties.Properties;
 
   constructor() {
@@ -148,14 +150,17 @@ class Wrapper {
 
     const userName = this._properties.getProperty("USERNAME");
     const password = this._properties.getProperty("PASSWORD");
+    const educationSpace =
+      this._properties.getProperty("EDUCATION_SPACE") ?? "4";
     if (!userName || !password) throw new Error("Login or password is not set");
 
     this.userName = userName;
     this.password = password;
+    this.educationSpace = parseInt(educationSpace);
   }
 
   logIn() {
-    const request = Client.post("https://edu.donstu.ru/api/tokenauth", {
+    const request = Client.post("https://lk.donstu.ru/api/tokenauth", {
       contentType: "application/json",
       payload: JSON.stringify({
         userName: this.userName,
@@ -171,7 +176,7 @@ class Wrapper {
   }
 
   sessionValidate() {
-    const request = Client.get("https://edu.donstu.ru/api/tokenauth", {
+    const request = Client.get("https://lk.donstu.ru/api/tokenauth", {
       muteHttpExceptions: true,
     });
 
@@ -180,7 +185,7 @@ class Wrapper {
 
   year() {
     const request = Client.get(
-      "https://edu.donstu.ru/api/SchoolX/Admin/Periods?now=true&educationSpaceID=4"
+      `https://lk.donstu.ru/api/SchoolX/Admin/Periods?now=true&educationSpaceID=${this.educationSpace}`
     );
     const data = JSON.parse(request.getContentText()) as Periods.RootObject;
     const years = data.data.years;
@@ -193,15 +198,14 @@ class Wrapper {
 
     const year = this.year();
     const mouth = new Date().getMonth() + 1;
+    const nMouth = mouth === 12 ? 1 : mouth + 1;
 
     const request = Client.get(
-      `https://edu.donstu.ru/api/RaspManager?educationSpaceID=4&month=${mouth}&year=${year}`
+      `https://lk.donstu.ru/api/RaspManager?educationSpaceID=${this.educationSpace}&month=${mouth}&year=${year}`
     );
     const data = JSON.parse(request.getContentText()) as Schedule.RootObject;
     const request1 = Client.get(
-      `https://edu.donstu.ru/api/RaspManager?educationSpaceID=4&month=${
-        mouth + 1
-      }&year=${year}`
+      `https://lk.donstu.ru/api/RaspManager?educationSpaceID=${this.educationSpace}&month=${nMouth}&year=${year}`
     );
     const data1 = JSON.parse(request1.getContentText()) as Schedule.RootObject;
 

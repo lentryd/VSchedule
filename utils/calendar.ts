@@ -82,7 +82,7 @@ class VCalendar {
       calendarId = CalendarApp.createCalendar("Edu Schedule", {
         color: "#4285f4",
         summary: "Расписание занятий",
-        location: "https://edu.donstu.ru/WebApp/#/RaspManager/Calendar",
+        location: "https://lk.donstu.ru/WebApp/#/RaspManager/Calendar",
       }).getId();
       properties.setProperty("CALENDAR_ID", calendarId);
     }

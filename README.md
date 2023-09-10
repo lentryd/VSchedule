@@ -1,6 +1,6 @@
 # VSchedule
 
-Этот скрипт позволяет вам перенести свое расписание с сайта [edu.donstu.ru](https://edu.donstu.ru/) в Google Календарь.
+Этот скрипт позволяет вам перенести свое расписание с сайта [lk.donstu.ru](https://lk.donstu.ru/) в Google Календарь.
 
 ## Начало работы
 
@@ -17,11 +17,11 @@
 
 > Все введенные вами данные хранятся на серверах Google, и только у вас есть к ним доступ.
 
-1. Перейдите на [страницу скрипта](https://script.google.com/macros/s/AKfycbz-EbkGWnTWWSDEkp_obZfHfH_0PoV-WEFoD-EjW6j2cR6Ad4pQXNbmCeZfJYgHZec/exec)
+1. Перейдите на [страницу скрипта](https://script.google.com/macros/s/AKfycbzd5BLZi4CFrtKlET8Or01dqDDRpCJusI54PeiUbuK9umVM8Qd5zVapjYYczv-5AzA/exec)
 2. Предоставьте доступ к своему аккаунту Google
    > На данный момент скрипт не проверен Google и поэтому отображается такое окно. Нажмите "Посмотреть дополнительную информацию" -> "Перейти на страницу...".
    > ![Картинка](./docs/image.png)
-3. Введите данные вашего аккаунта на сайте [edu.donstu.ru](https://edu.donstu.ru/)
+3. Введите данные вашего аккаунта на сайте [lk.donstu.ru](https://lk.donstu.ru/)
 
 ## Проверка установки
 

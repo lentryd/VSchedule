@@ -1,11 +1,26 @@
-function doGet() {
+function doGet(e) {
+  if (e.pathInfo === "disable") {
+    const properties = PropertiesService.getUserProperties();
+    const trigger = ScriptApp.getProjectTriggers().find(
+      (t) => t.getUniqueId() === properties.getProperty("TRIGGER_ID")
+    );
+    if (trigger) ScriptApp.deleteTrigger(trigger);
+    CalendarApp.getCalendarById(
+      properties.getProperty("CALENDAR_ID")
+    ).deleteCalendar();
+    properties.deleteAllProperties();
+
+    return HtmlService.createHtmlOutput(
+      "Расписание отключено, спасибо за использование"
+    );
+  }
   return HtmlService.createTemplateFromFile("web/app").evaluate();
 }
 function include(filename: string) {
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }
 
-function init(login: string, password: string) {
+function init(login: string, password: string, educationSpace = "4") {
   const properties = PropertiesService.getUserProperties();
   const trigger = ScriptApp.getProjectTriggers().find(
     (t) => t.getUniqueId() === properties.getProperty("TRIGGER_ID")
@@ -15,12 +30,13 @@ function init(login: string, password: string) {
   if (login && password) {
     properties.setProperty("USERNAME", login);
     properties.setProperty("PASSWORD", password);
+    properties.setProperty("EDUCATION_SPACE", educationSpace);
   } else if (!properties.getProperty("AUTH_TOKEN")) {
     throw new Error("Не указаны логин и пароль");
   }
 
   const edu = new Wrapper();
-  if (!edu.logIn()) return;
+  if (!edu.logIn()) throw new Error("Неверный логин или пароль");
 
   const triggerId = ScriptApp.newTrigger("triggerManager")
     .timeBased()

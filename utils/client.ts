@@ -5,15 +5,31 @@ namespace Client {
     url: string,
     opt?: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions
   ) {
-    const request = UrlFetchApp.fetch(url, {
-      ...opt,
-      headers: {
-        ...opt.headers,
-        cookie: "authToken=" + _properties.getProperty("AUTH_TOKEN"),
-      },
-    });
+    let done = false;
+    while (!done) {
+      try {
+        const request = UrlFetchApp.fetch(url, {
+          ...opt,
+          headers: {
+            ...opt.headers,
+            cookie: "authToken=" + _properties.getProperty("AUTH_TOKEN"),
+          },
+        });
+        done = true;
 
-    return request;
+        return request;
+      } catch (e) {
+        if (
+          e.message.includes("Address unavailable") ||
+          e.message.includes("Адрес недоступен")
+        ) {
+          Logger.log(e);
+          Utilities.sleep(1000);
+        } else {
+          throw e;
+        }
+      }
+    }
   }
 
   export function get(
